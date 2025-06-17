@@ -30,7 +30,7 @@ public class OrderItems {
         this.priceAtPurchase = priceAtPurchase;
     }
 
-    // Behövs för JSON (t.ex. vid POST) – tom konstruktor
+    // Behövs för JSON t.ex. vid POST??
     public OrderItems() {
     }
 }

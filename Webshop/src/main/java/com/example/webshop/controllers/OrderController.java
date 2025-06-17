@@ -23,12 +23,13 @@ public class OrderController {
 
         return orderService.placeOrder(order);
     }
+    //Hämta alla
     @GetMapping
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return ResponseEntity.ok(orders);
     }
-
+//hämta order:id
     @GetMapping("/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
         Order order = orderService.getOrderById(id);

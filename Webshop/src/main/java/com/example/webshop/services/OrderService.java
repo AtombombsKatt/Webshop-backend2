@@ -41,10 +41,10 @@ public class OrderService {
             if (product.getStock() < item.getQuantity()) {
                 throw new OutOfStockException("PRodukten är slut i lager " + product.getTitle());
             }
-
-            product.setStock(product.getStock() - item.getQuantity());
             // spara nya stock i collectionen
+            product.setStock(product.getStock() - item.getQuantity());
             productRepository.save(product);
+
             item.setPriceAtPurchase(product.getPrice());
             totalAmount += product.getPrice()* item.getQuantity();
         }
@@ -55,6 +55,8 @@ public class OrderService {
         orderRepository.save(order);
         return new OrderConfirmation(order.getId(), order.getTotalAmount(), "Order bekräftad! summa " + totalAmount + " Order nummer: " + order.getId(), order.getOrderDate());
     }
+
+
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }

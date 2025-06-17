@@ -21,7 +21,7 @@ public class ProductService {
 
     public Product getProductById(Long id) {
         return productRepo.findById(id)
-        .orElseThrow(() -> new ProductNotFoundException(+ id ));
+        .orElseThrow(() -> new ProductNotFoundException(id ));
     }
     public Product createProduct(Product product) {
         productRepo.save(product);

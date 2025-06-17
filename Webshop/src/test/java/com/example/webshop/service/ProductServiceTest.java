@@ -25,7 +25,7 @@ public class ProductServiceTest {
 
     @InjectMocks
     private ProductService productService;
-
+//hämta produkter test
     @Test
     void testGetAllProducts_returnsList() {
         // Arrange
@@ -43,7 +43,7 @@ public class ProductServiceTest {
         assertEquals(2, products.size());
         verify(productRepo).findAll();
     }
-
+//hämta via :id test
     @Test
     void testGetProductById_returnsProduct() {
         // Arrange
@@ -57,7 +57,7 @@ public class ProductServiceTest {
         assertNotNull(result);
         assertEquals("Test1", result.getTitle());
     }
-
+// exception vid fel :id test
     @Test
     void testGetProductById_throwsException() {
         // Arrange

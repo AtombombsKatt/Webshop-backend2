@@ -32,12 +32,12 @@ public class OrderServiceTest {
 
     @InjectMocks
     private OrderService orderService;
-
+//Lagerstatus minskar test, totalasumman test
     @Test
     void testPlaceOrder_successful() {
         Product product = new Product(1L, "Test Produkt", "Beskrivning", 100.0, "", 10);
         OrderItems item = new OrderItems(1L, 2, 100.0); // rätt konstruktor
-        CustomerInfo customer = new CustomerInfo("Test Namn", "Testgatan 1", "test@example.com");
+        CustomerInfo customer = new CustomerInfo("Test klas", "Testvägen 7", "test@example.com");
         Order order = new Order(null, customer, List.of(item), 0.0, null);
 
         when(productRepo.findById(1L)).thenReturn(Optional.of(product));
@@ -48,23 +48,23 @@ public class OrderServiceTest {
         assertEquals(8, product.getStock()); // 10 - 2
         verify(orderRepo).save(any(Order.class));
     }
-
+// köp av produkt som inte finns test
     @Test
     void testPlaceOrder_productNotFound() {
         OrderItems item = new OrderItems(999L, 1, 0.0);
-        CustomerInfo customer = new CustomerInfo("Test Namn", "Testgatan 1", "test@example.com");
+        CustomerInfo customer = new CustomerInfo("Test Elin", "Testgvägen 4", "test@example.com");
         Order order = new Order(null, customer, List.of(item), 0.0, null);
 
         when(productRepo.findById(999L)).thenReturn(Optional.empty());
 
         assertThrows(ProductNotFoundException.class, () -> orderService.placeOrder(order));
     }
-
+// slut i lager test
     @Test
     void testPlaceOrder_outOfStock() {
         Product product = new Product(1L, "Slut i lager", "Beskrivning", 100.0, "", 1);
         OrderItems item = new OrderItems(1L, 5, 100.0); // vill ha 5, finns 1
-        CustomerInfo customer = new CustomerInfo("Test Namn", "Testgatan 1", "test@example.com");
+        CustomerInfo customer = new CustomerInfo("Test sara", "Testvägen 3", "test@example.com");
         Order order = new Order(null, customer, List.of(item), 0.0, null);
 
         when(productRepo.findById(1L)).thenReturn(Optional.of(product));
